@@ -15,9 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.benshi_test.databinding.FragmentHomeBinding;
 import com.example.benshi_test.viewModels.PostViewModel;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +31,7 @@ public class HomeFragment extends Fragment {
     ProgressBar progressBar;
     ArrayList<PostViewModel> allPosts = new ArrayList<>();
     PostsAdapter postsAdapter;
-    int page = 1, limit = 10;
+    int page = 1, limit = 7;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -42,18 +39,6 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
         postListView = binding.postsList;
         progressBar = binding.progressBar;
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("userId", 1);
-            jsonObject.put("id", 1);
-            jsonObject.put("title", "post title, hard coded");
-            jsonObject.put("body", "post body");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-
-        allPosts.add(PostViewModel.fromJson(jsonObject));
         postsAdapter = new PostsAdapter(allPosts);
         postListView.setLayoutManager(new LinearLayoutManager(getActivity()));
         postListView.setAdapter(postsAdapter);
@@ -78,7 +63,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void getAllPosts(int page, int limit) {
-        Log.d("TAG", "getAllPosts: ");
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://jsonplaceholder.typicode.com/")
                 .addConverterFactory(GsonConverterFactory.create())
