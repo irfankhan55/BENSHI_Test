@@ -1,5 +1,5 @@
 package com.example.benshi_test.ui.home;
-import android.app.Activity;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,15 +10,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.benshi_test.databinding.PostItemBinding;
+import com.example.benshi_test.viewModels.PostViewModel;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.viewHolder> {
-    List<String> posts;
+    ArrayList<PostViewModel> posts;
     private PostItemBinding binding;
 
-    public PostsAdapter(List<String> list) {
-        this.posts = list;
+    public PostsAdapter(ArrayList<PostViewModel> postList) {
+        this.posts = postList;
     }
 
 
@@ -34,7 +35,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.viewHolder> 
     public void onBindViewHolder(@NonNull viewHolder holder, int position) {
         TextView title = binding.title;
 //        ImageView postImage = binding.listImage;
-        title.setText(posts.get(position));
+        title.setText(posts.get(position).title);
     }
 
     @Override
