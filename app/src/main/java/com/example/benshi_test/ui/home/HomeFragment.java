@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,6 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+    NestedScrollView nestedScrollView;
     RecyclerView postListView;
     ProgressBar progressBar;
     ArrayList<PostViewModel> allPosts = new ArrayList<>();
@@ -36,7 +38,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
+        nestedScrollView = binding.getRoot();
         postListView = binding.postsList;
         progressBar = binding.progressBar;
         postsAdapter = new PostsAdapter(allPosts);
@@ -44,21 +46,16 @@ public class HomeFragment extends Fragment {
         postListView.setAdapter(postsAdapter);
         getAllPosts(page, limit);
 
-        postListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-
-                if (!recyclerView.canScrollVertically(1)) {
-                    page ++;
-                    progressBar.setVisibility(View.VISIBLE);
-                    getAllPosts(page,limit);
-                }
+        nestedScrollView.setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if(scrollY == v.getChildAt(0).getMeasuredHeight() - v.getMeasuredHeight()){
+                page ++;
+                progressBar.setVisibility(View.VISIBLE);
+                getAllPosts(page,limit);
             }
         });
 
-        return root;
+
+        return nestedScrollView;
 
     }
 
