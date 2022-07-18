@@ -15,4 +15,9 @@
         android:name="com.example.benshi_test.Screens.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/nav_events"
+        android:name="com.example.benshi_test.Screens.events.EventsListFragment"
+        android:label="@string/menu_events"
+        tools:layout="@layout/fragment_events" />
 </navigation>
