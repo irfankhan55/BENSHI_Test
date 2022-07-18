@@ -1,4 +1,4 @@
-package com.example.benshi_test.utils;
+package com.example.benshi_test.Utils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -15,7 +15,7 @@ public class Utils {
             if (digest != null) {
                 digest.reset();
             }
-            return "https://picsum.photos/seed/"+ bin2hex(digest.digest(postTitle.getBytes())) + "/200/200";
+            return bin2hex(digest.digest(postTitle.getBytes()));
         } catch (Exception ignored) {
             return null;
         }

@@ -1,4 +1,4 @@
-package com.example.benshi_test.ui.home;
+package com.example.benshi_test.Screens.home;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,9 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.benshi_test.utils.Utils;
+import com.example.benshi_test.APIs.ServiceGenerator;
+import com.example.benshi_test.Utils.Utils;
 import com.example.benshi_test.databinding.PostItemBinding;
-import com.example.benshi_test.viewModels.PostViewModel;
+import com.example.benshi_test.ViewModels.PostViewModel;
 
 import java.util.ArrayList;
 
@@ -39,7 +40,7 @@ public class PostsAdapter extends RecyclerView.Adapter<PostsAdapter.viewHolder> 
         TextView body = binding.body;
         ImageView postImage = binding.listImage;
         Glide.with(postImage.getContext())
-                .load(Utils.getSha256Hash(posts.get(position).title))
+                .load(ServiceGenerator.BASE_URL_PHOTOS + Utils.getSha256Hash(posts.get(position).title) + "/400/200")
                 .override(200, 200)
                 .fitCenter() // scale to fit entire image within ImageView
                 .into(postImage);

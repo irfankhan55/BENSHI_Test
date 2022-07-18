@@ -7,7 +7,7 @@
     android:layout_margin="5dp"
     app:cardCornerRadius="4dp"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.home.PostsAdapter"
+    tools:context=".Screens.home.PostsAdapter"
     >
 
     <!--  ListRow Left sied Thumbnail image -->
@@ -29,15 +29,16 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
+
             <TextView
                 android:id="@+id/autherName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="start"
                 android:padding="8dp"
-                android:textSize="13sp"
                 android:text="@string/autherName"
-                android:textStyle="bold"
-                android:gravity="start"/>
+                android:textSize="20sp"
+                android:textStyle="bold" />
             <TextView
                 android:id="@+id/title"
                 android:layout_width="match_parent"

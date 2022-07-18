@@ -1,4 +1,4 @@
-package com.example.benshi_test.viewModels;
+package com.example.benshi_test.ViewModels;
 
 import android.util.Log;
 import org.json.JSONException;

@@ -1,4 +1,4 @@
-package com.example.benshi_test.ui.settings;
+package com.example.benshi_test.Screens.settings;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

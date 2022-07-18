@@ -1,4 +1,4 @@
-package com.example.benshi_test.ui.home;
+package com.example.benshi_test.Screens.home;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -13,10 +13,10 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.benshi_test.apiManager.APIManager;
-import com.example.benshi_test.apiManager.ServiceGenerator;
+import com.example.benshi_test.APIs.APIManager;
+import com.example.benshi_test.APIs.ServiceGenerator;
 import com.example.benshi_test.databinding.FragmentHomeBinding;
-import com.example.benshi_test.viewModels.PostViewModel;
+import com.example.benshi_test.ViewModels.PostViewModel;
 
 import java.util.ArrayList;
 import java.util.List;

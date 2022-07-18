@@ -1,4 +1,4 @@
-package com.example.benshi_test.apiManager;
+package com.example.benshi_test.APIs;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -8,6 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ServiceGenerator {
 
     private static final String BASE_URL = "https://jsonplaceholder.typicode.com/";
+    public static final String BASE_URL_PHOTOS = "https://picsum.photos/seed/";
 
     private static Retrofit.Builder builder =
             new Retrofit.Builder()
