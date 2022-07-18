@@ -14,8 +14,8 @@ import retrofit2.http.Query;
 public interface APIManager {
     @GET("posts?")
     Call<List<PostViewModel>> GET_ALL_POSTS (
-            @Query("_page=") int page,
-            @Query("_limit=") int limit
+            @Query("_page") int page,
+            @Query("_limit") int limit
     );
 
     @GET("users/{user_id}")
