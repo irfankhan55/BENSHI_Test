@@ -70,12 +70,14 @@ public class HomeFragment extends Fragment {
                     parseAllPosts(response.body());
                     //TODO: offline first architecture : if page = 1, store first 4 into realm
                 }else{
+                    // TODO: show Alert to user
                     Log.d("TAG", "getAllPosts: something went wrong ");
                 }
             }
 
             @Override
             public void onFailure(@NonNull Call<List<PostViewModel>> call, @NonNull Throwable t) {
+                // TODO: show Error info and Alert to user
                 Log.d("TAG", "getAllPosts: Failed " + t);
             }
         });
