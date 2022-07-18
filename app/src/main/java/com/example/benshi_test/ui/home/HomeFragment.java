@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.benshi_test.apiManager.APIManager;
+import com.example.benshi_test.apiManager.ServiceGenerator;
 import com.example.benshi_test.databinding.FragmentHomeBinding;
 import com.example.benshi_test.viewModels.PostViewModel;
 
@@ -22,8 +24,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class HomeFragment extends Fragment {
 
@@ -33,7 +33,7 @@ public class HomeFragment extends Fragment {
     ProgressBar progressBar;
     ArrayList<PostViewModel> allPosts = new ArrayList<>();
     PostsAdapter postsAdapter;
-    int page = 1, limit = 7;
+    int page = 1, limit = 4;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -60,20 +60,17 @@ public class HomeFragment extends Fragment {
     }
 
     private void getAllPosts(int page, int limit) {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://jsonplaceholder.typicode.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        MainInterface mainInterface = retrofit.create(MainInterface.class);
-        Call<List<PostViewModel>> call = mainInterface.LIST_CALL(page, limit);
+        APIManager apiManager = ServiceGenerator.createService(APIManager.class);
+        Call<List<PostViewModel>> call = apiManager.GET_ALL_POSTS(page, limit);
         call.enqueue(new Callback<List<PostViewModel>>() {
             @Override
             public void onResponse(@NonNull Call<List<PostViewModel>> call, @NonNull Response<List<PostViewModel>> response) {
                 if(response.isSuccessful() && response.body() != null){
                     progressBar.setVisibility(View.GONE);
                     parseAllPosts(response.body());
+                    //TODO: offline first architecture : if page = 1, store first 4 into realm
                 }else{
-                    Log.d("TAG", "getAllPosts: Response else ");
+                    Log.d("TAG", "getAllPosts: something went wrong ");
                 }
             }
 
@@ -86,6 +83,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void parseAllPosts(List<PostViewModel> postsArray) {
+
         for (int i=0; i<postsArray.size(); i++){
                 allPosts.add(postsArray.get(i));
                 postsAdapter = new PostsAdapter(allPosts);
