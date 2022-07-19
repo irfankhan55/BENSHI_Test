@@ -20,4 +20,9 @@
         android:name="com.example.benshi_test.Screens.events.EventsListFragment"
         android:label="@string/menu_events"
         tools:layout="@layout/fragment_events" />
+    <fragment
+        android:id="@+id/post_details"
+        android:name="com.example.benshi_test.Screens.home.PostDetailFragment"
+        android:label="@string/post_details_page"
+        tools:layout="@layout/fragment_post_detail" />
 </navigation>

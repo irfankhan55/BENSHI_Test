@@ -10,13 +10,15 @@ import android.widget.ProgressBar;
 import androidx.annotation.NonNull;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.benshi_test.APIs.APIManager;
 import com.example.benshi_test.APIs.ServiceGenerator;
-import com.example.benshi_test.databinding.FragmentHomeBinding;
+import com.example.benshi_test.R;
 import com.example.benshi_test.ViewModels.PostViewModel;
+import com.example.benshi_test.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +54,13 @@ public class HomeFragment extends Fragment {
                 progressBar.setVisibility(View.VISIBLE);
                 getAllPosts(page,limit);
             }
+        });
+
+        PostItemClickHelper.addTo(postListView).setOnItemClickListener((recyclerView, position, v) -> {
+            Log.d("ITEM_CLICKED", "onItemClicked: " + position);
+            Bundle bundle = new Bundle();
+            bundle.putString("postId", String.valueOf(allPosts.get(position).id));
+            Navigation.findNavController(recyclerView).navigate(R.id.post_details, bundle);
         });
 
 
